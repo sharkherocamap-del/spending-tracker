@@ -84,11 +84,22 @@
 
     /* ---- HEADER ---- */
     header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0 18px;
+      display: flex; flex-direction: column;
+      padding: 18px 0 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 28px;
-      flex-wrap: wrap; gap: 12px;
+    }
+    /* Top row: logo + user controls */
+    .header-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding-bottom: 14px; flex-wrap: wrap;
+    }
+    /* Bottom row: data action buttons */
+    .header-bottom {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 0 12px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
     .logo { display: flex; align-items: center; gap: 10px; }
     .logo-icon {
@@ -99,6 +110,8 @@
     }
     .logo-text h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; line-height: 1.1; }
     .logo-text span { font-size: 11px; color: var(--text3); font-weight: 400; font-family: 'DM Mono', monospace; }
+    /* User controls group (right side of top row) */
+    .header-user { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     /* ---- MONTH FILTER ---- */
@@ -680,33 +693,28 @@
     @media (max-width: 720px) {
       .app-wrapper { padding: 0 12px 40px; max-width: 100%; }
 
-      header {
-        align-items: stretch;
-        gap: 14px;
-        padding: 16px 0 14px;
-      }
-      .logo { width: 100%; }
+      header { padding: 14px 0 0; }
+
+      .header-top { padding-bottom: 12px; gap: 10px; }
+      .logo { flex: 1; min-width: 0; }
       .logo-text h1 { font-size: 16px; }
       .logo-text span { font-size: 10px; }
 
-      .header-actions {
-        width: 100%;
+      .header-user { gap: 6px; }
+      .header-user .btn { padding: 7px 10px; font-size: 12px; }
+      .header-user .btn-icon { padding: 7px 9px; }
+
+      .header-bottom {
+        gap: 6px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
       }
-      .header-actions .btn,
-      .header-actions .btn-icon,
-      .header-actions .month-filter {
-        width: 100%;
-        min-width: 0;
+      .header-bottom .btn,
+      .header-bottom .btn-icon,
+      .header-bottom .month-filter {
+        width: 100%; min-width: 0;
       }
-      .header-actions .btn {
-        justify-content: center;
-        padding: 9px 10px;
-        font-size: 12px;
-      }
-      .header-actions .btn-icon { display: flex; justify-content: center; align-items: center; }
+      .header-bottom .btn { justify-content: center; padding: 9px 10px; font-size: 12px; }
       .month-filter { grid-column: 1 / -1; }
       .month-filter select { width: 100%; }
 
@@ -955,14 +963,26 @@
        HEADER
   =================================================== -->
   <header>
-    <div class="logo">
-      <div class="logo-icon">💰</div>
-      <div class="logo-text">
-        <h1>Spending Tracker</h1>
-        <span>Quản lý chi tiêu · VND</span>
+    <!-- TOP ROW: logo + user controls -->
+    <div class="header-top">
+      <div class="logo">
+        <div class="logo-icon">💰</div>
+        <div class="logo-text">
+          <h1>Spending Tracker</h1>
+          <span>Quản lý chi tiêu · VND</span>
+        </div>
+      </div>
+      <div class="header-user">
+        <span id="syncDot" class="sync-dot saving" title="Đang kết nối..."></span>
+        <span class="user-pill" id="userPill"><span class="user-dot"></span><span id="userPillName">—</span></span>
+        <button class="btn btn-ghost" onclick="showAccountModal()" id="accountBtn" title="Tài khoản">👤 Tài khoản</button>
+        <button class="btn btn-ghost" onclick="handleLogout()" title="Đăng xuất">🚪 Đăng xuất</button>
+        <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="Đổi giao diện">🌙</button>
       </div>
     </div>
-    <div class="header-actions">
+
+    <!-- BOTTOM ROW: data action buttons + month filter -->
+    <div class="header-bottom">
       <div class="month-filter">
         <label>Lọc</label>
         <select id="monthFilter" onchange="onMonthFilterChange()">
@@ -976,11 +996,6 @@
       <button class="btn btn-ghost" onclick="document.getElementById('importJsonFile').click()">📂 Import JSON</button>
       <input type="file" id="importJsonFile" accept="application/json,.json" style="display:none" onchange="importJSON(event)" />
       <button class="btn btn-danger" onclick="showDataManagerModal()">🗂 Quản lý dữ liệu</button>
-      <span id="syncDot" class="sync-dot saving" title="Đang kết nối..."></span>
-      <span class="user-pill" id="userPill"><span class="user-dot"></span><span id="userPillName">—</span></span>
-      <button class="btn btn-ghost" onclick="showAccountModal()" id="accountBtn" title="Tài khoản">👤 Tài khoản</button>
-      <button class="btn btn-ghost" onclick="handleLogout()" title="Đăng xuất">🚪 Đăng xuất</button>
-      <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="Đổi giao diện">🌙</button>
     </div>
   </header>
 
