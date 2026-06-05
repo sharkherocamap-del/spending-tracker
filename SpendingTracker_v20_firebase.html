@@ -1404,11 +1404,13 @@
     _lastLocalSave = Date.now();
     showSyncStatus('saving');
     try {
+      // Firestore rejects undefined values — replace them all with null
+      const clean = obj => JSON.parse(JSON.stringify(obj, (k, v) => v === undefined ? null : v));
       await DOC_REF.set({
-        transactions,
-        recurringItems,
+        transactions:     clean(transactions),
+        recurringItems:   clean(recurringItems),
         appliedRecurring: [...appliedRecurring],
-        budgetItems,
+        budgetItems:      clean(budgetItems),
         customTags,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
