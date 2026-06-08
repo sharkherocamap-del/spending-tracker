@@ -54,15 +54,15 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.65;
       transition: background var(--transition), color var(--transition);
       overflow-x: hidden;
     }
     button { cursor: pointer; font-family: inherit; }
     input, select, textarea {
       font-family: inherit;
-      font-size: 14px;
+      font-size: 15px;
       background: var(--bg3);
       color: var(--text);
       border: 1px solid var(--border);
@@ -336,12 +336,12 @@
     /* ---- CARDS ---- */
     .card {
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 22px; box-shadow: var(--card-shadow);
+      border-radius: var(--radius); padding: 26px; box-shadow: var(--card-shadow);
       transition: background var(--transition), border-color var(--transition);
     }
     .card-title {
-      font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.8px; color: var(--text3); margin-bottom: 18px;
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text3); margin-bottom: 20px;
       display: flex; align-items: center; gap: 7px;
     }
     .card-title::before {
@@ -356,7 +356,7 @@
     @media (max-width: 880px) { .summary-row { grid-template-columns: repeat(2, 1fr); } }
     .summary-card {
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
+      border-radius: var(--radius); padding: 24px;
       position: relative; overflow: hidden;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
@@ -369,14 +369,14 @@
     .summary-card.expense::before { background: var(--red); }
     .summary-card.balance::before { background: var(--accent); }
     .summary-card.category::before { background: var(--purple); }
-    .sc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text3); margin-bottom: 8px; }
-    .sc-value { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; word-break: break-all; }
+    .sc-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text3); margin-bottom: 8px; }
+    .sc-value { font-family: 'DM Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; word-break: break-all; }
     .sc-value.pos { color: var(--green); }
     .sc-value.neg { color: var(--red); }
     .sc-value.blue { color: var(--accent); }
     .sc-value.purple { color: var(--purple); }
-    .sc-sub { font-size: 11px; color: var(--text3); margin-top: 5px; }
-    .sc-icon { position: absolute; top: 16px; right: 16px; font-size: 22px; opacity: 0.3; }
+    .sc-sub { font-size: 12px; color: var(--text3); margin-top: 5px; }
+    .sc-icon { position: absolute; top: 16px; right: 16px; font-size: 24px; opacity: 0.3; }
 
     /* ============================================================
        COLLAPSIBLE ADD TRANSACTION
@@ -503,12 +503,12 @@
     }
     .rec-info { min-width: 0; }
     .rec-name {
-      font-size: 12px; font-weight: 600; color: var(--text);
+      font-size: 14px; font-weight: 600; color: var(--text);
       white-space: normal; overflow: visible; text-overflow: unset;
       line-height: 1.35; overflow-wrap: anywhere;
     }
     .rec-meta {
-      font-size: 11px; color: var(--text3); line-height: 1.45;
+      font-size: 12px; color: var(--text3); line-height: 1.45;
       margin-top: 2px; overflow-wrap: anywhere;
     }
     .rec-bottom {
@@ -516,11 +516,11 @@
       flex-wrap: wrap;
     }
     .rec-amount {
-      font-family: 'DM Mono', monospace; font-size: 12px;
+      font-family: 'DM Mono', monospace; font-size: 14px;
       color: var(--red); font-weight: 600; white-space: nowrap;
     }
     .rec-badge {
-      font-size: 9px; padding: 2px 7px; border-radius: 99px;
+      font-size: 11px; padding: 2px 8px; border-radius: 99px;
       background: rgba(163,113,247,0.15); color: var(--purple);
       border: 1px solid rgba(163,113,247,0.3); white-space: nowrap;
     }
@@ -761,9 +761,9 @@
     .tx-item:hover { background: var(--bg3); }
     .tx-emoji { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
     .tx-info { min-width:0; }
-    .tx-cat  { font-weight:500; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px; }
-    .tx-meta { font-size:11px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .tx-amount { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; text-align:right; white-space:nowrap; }
+    .tx-cat  { font-weight:500; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px; }
+    .tx-meta { font-size:12px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .tx-amount { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; text-align:right; white-space:nowrap; }
     .tx-amount.income  { color: var(--green); }
     .tx-amount.expense { color: var(--red); }
     .tx-actions { display:flex; align-items:center; gap:4px; }
@@ -942,7 +942,6 @@
       .main-grid { grid-template-columns: 1fr; gap: 18px; }
       .card { padding: 16px; border-radius: 12px; }
       .card-title { font-size: 11px; line-height: 1.3; }
-
       .form-row,
       .rec-add-row .form-row,
       .budget-form .form-row,
@@ -956,6 +955,13 @@
       input, select, textarea { min-width: 0; font-size: 13px; padding: 9px 10px; }
       select[multiple] { min-height: 110px; }
       .btn-submit { padding: 11px; font-size: 13px; }
+      .sc-value { font-size: 16px; }
+      .rec-name { font-size: 13px; }
+      .rec-meta { font-size: 11px; }
+      .rec-amount { font-size: 12px; }
+      .tx-cat { font-size: 13px; }
+      .tx-meta { font-size: 11px; }
+      .tx-amount { font-size: 12px; }
 
       .rec-header,
       .tx-header,
@@ -3158,18 +3164,21 @@
     const subEl = document.getElementById('backupReminderSub');
     const days = getDaysSinceBackup();
     box.classList.remove('due', 'ok');
+
+    // Only show reminder if never backed up, or >10 days ago
     if (days === null) {
+      box.style.display = '';
       box.classList.add('due');
       titleEl.textContent = '💾 Backup reminder';
-      subEl.textContent = 'Last backup: never. Save JSON để bảo vệ dữ liệu.';
-    } else if (days >= 7) {
+      subEl.textContent = 'Chưa từng backup. Save JSON để bảo vệ dữ liệu.';
+    } else if (days > 10) {
+      box.style.display = '';
       box.classList.add('due');
       titleEl.textContent = '⚠️ Đã đến lúc backup dữ liệu';
-      subEl.textContent = `Last backup: ${days} days ago.`;
+      subEl.textContent = `Last backup: ${days} ngày trước.`;
     } else {
-      box.classList.add('ok');
-      titleEl.textContent = '💾 Backup reminder';
-      subEl.textContent = days === 0 ? 'Last backup: today.' : `Last backup: ${days} days ago.`;
+      // Backed up within 10 days — hide the banner entirely
+      box.style.display = 'none';
     }
   }
 
