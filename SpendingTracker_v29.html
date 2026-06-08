@@ -417,8 +417,14 @@
       opacity: 0;
     }
     .add-tx-body.open {
-      max-height: 700px;
+      max-height: 900px;
       opacity: 1;
+    }
+    @media (max-width: 720px) {
+      .add-tx-body.open {
+        max-height: 80vh;
+        overflow-y: auto;
+      }
     }
     .add-tx-inner {
       background: var(--bg2); border: 1px solid var(--accent);
@@ -961,22 +967,18 @@
       .manager-collapsible-header .btn { flex-shrink: 0; }
 
       .rec-item {
-        display: grid;
-        grid-template-columns: 34px 1fr auto;
-        grid-template-areas:
-          "icon info delete"
-          "icon amount delete";
-        gap: 8px 10px;
-        align-items: start;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
         padding: 12px;
       }
-      .rec-emoji { grid-area: icon; }
-      .rec-info { grid-area: info; }
+      .rec-emoji { flex-shrink: 0; }
+      .rec-main { flex: 1; min-width: 0; }
       .rec-name { white-space: normal; line-height: 1.35; }
       .rec-meta { white-space: normal; line-height: 1.45; }
-      .rec-amount { grid-area: amount; text-align: left; white-space: normal; }
-      .rec-badge { justify-self: start; }
-      .rec-del { grid-area: delete; opacity: 1; }
+      .rec-amount { text-align: left; white-space: normal; }
+      .rec-del { opacity: 1; flex-shrink: 0; }
 
       .tx-item {
         grid-template-columns: 32px 1fr;
