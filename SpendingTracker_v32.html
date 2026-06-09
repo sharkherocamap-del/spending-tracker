@@ -379,7 +379,7 @@
     .sc-icon { position: absolute; top: 14px; right: 14px; font-size: 22px; opacity: 0.25; }
     .sc-badge {
       display: inline-flex; align-items: center; gap: 3px;
-      font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; font-weight: 500;
+      font-size: 12px; padding: 4px 9px; border-radius: 99px; margin-top: 8px; font-weight: 500;
       font-family: 'DM Mono', monospace;
     }
     .sc-badge.up   { background: rgba(63,185,80,0.15); color: var(--green); }
@@ -625,7 +625,7 @@
     }
     .analytics-kpi {
       background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 18px 20px; position: relative; overflow: hidden;
+      padding: 22px 24px; position: relative; overflow: hidden;
     }
     .analytics-kpi::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -634,14 +634,14 @@
     .analytics-kpi.kpi-expense::before { background: var(--red); }
     .analytics-kpi.kpi-income::before  { background: var(--green); }
     .analytics-kpi.kpi-save::before    { background: var(--accent); }
-    .kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text3); margin-bottom: 6px; }
-    .kpi-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; word-break: break-word; }
+    .kpi-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text3); margin-bottom: 8px; }
+    .kpi-value { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; line-height: 1.2; word-break: break-word; }
     .kpi-value.red   { color: var(--red); }
     .kpi-value.green { color: var(--green); }
     .kpi-value.blue  { color: var(--accent); }
     .kpi-badge {
       display: inline-flex; align-items: center; gap: 3px;
-      font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; font-weight: 500;
+      font-size: 12px; padding: 4px 9px; border-radius: 99px; margin-top: 8px; font-weight: 500;
     }
     .kpi-badge.up   { background: rgba(63,185,80,0.15); color: var(--green); }
     .kpi-badge.down { background: rgba(248,81,73,0.15); color: var(--red); }
@@ -652,24 +652,87 @@
     .analytics-charts-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
     }
+    .analytics-dashboard-grid {
+      display:grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.95fr);
+      gap:20px;
+      align-items:stretch;
+    }
+    .analytics-left-column {
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      min-width:0;
+    }
+    .analytics-chart-card,
+    .analytics-cat-panel {
+      min-width:0;
+      overflow:visible;
+    }
+    .analytics-cat-panel {
+      display:flex;
+      flex-direction:column;
+      min-height:760px;
+    }
+    .analytics-cat-panel #catBreakdownChart {
+      flex:1;
+      min-height:0;
+    }
+    @media (max-width: 1100px) {
+      .analytics-dashboard-grid { grid-template-columns: 1fr; }
+      .analytics-cat-panel { min-height:0; }
+    }
     @media (max-width: 900px) { .analytics-charts-grid { grid-template-columns: 1fr; } }
 
     /* Category breakdown horizontal bars */
-    .cat-bar-list { display: flex; flex-direction: column; gap: 8px; }
-    .cat-bar-item { display: flex; flex-direction: column; gap: 4px; }
-    .cat-bar-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
-    .cat-bar-name { color: var(--text2); display: flex; align-items: center; gap: 5px; }
-    .cat-bar-val { font-family: 'DM Mono', monospace; color: var(--text3); font-size: 10px; }
-    .cat-bar-track { height: 8px; background: var(--bg3); border-radius: 99px; overflow: hidden; }
+    .cat-budget-summary {
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;
+      margin-bottom:14px; padding:12px; background:rgba(88,166,255,0.08);
+      border:1px solid rgba(88,166,255,0.22); border-radius:var(--radius-sm);
+    }
+    .cat-budget-kpi { min-width:0; }
+    .cat-budget-label { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
+    .cat-budget-value { font-family:'DM Mono',monospace; font-size:14px; color:var(--text); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .cat-bar-list { display: flex; flex-direction: column; gap: 13px; }
+    .cat-bar-item { display: flex; flex-direction: column; gap: 7px; padding:10px 0; border-bottom:1px solid rgba(139,148,158,0.12); }
+    .cat-bar-item:last-child { border-bottom:none; }
+    .cat-bar-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 12px; font-size: 13px; }
+    .cat-bar-name { color: var(--text); display: flex; align-items: center; gap: 7px; min-width: 0; font-weight:600; line-height:1.35; }
+    .cat-bar-val { display:flex; flex-direction:column; align-items:flex-end; gap:3px; min-width:128px; text-align:right; }
+    .cat-bar-spent { font-family: 'DM Mono', monospace; color: var(--text); font-size: 13px; font-weight:600; white-space: nowrap; }
+    .cat-bar-budget { font-family: 'DM Mono', monospace; color: var(--text3); font-size: 11px; white-space: nowrap; }
+    .cat-bar-pct {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:52px; padding:3px 8px; border-radius:99px;
+      font-family:'DM Mono',monospace; font-size:11px; font-weight:700;
+      border:1px solid transparent;
+    }
+    .cat-bar-pct.ok { background:rgba(63,185,80,0.16); color:#56d364; border-color:rgba(63,185,80,0.30); }
+    .cat-bar-pct.warn { background:rgba(210,153,34,0.18); color:#e3b341; border-color:rgba(210,153,34,0.32); }
+    .cat-bar-pct.danger { background:rgba(248,81,73,0.18); color:#ff7b72; border-color:rgba(248,81,73,0.34); }
+    .cat-bar-pct.none { background:rgba(139,148,158,0.14); color:var(--text2); border-color:rgba(139,148,158,0.25); }
+    .cat-bar-track { height: 12px; background: rgba(139,148,158,0.16); border-radius: 99px; overflow: hidden; border:1px solid rgba(139,148,158,0.12); }
     .cat-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    .cat-bar-fill.ok { background: linear-gradient(90deg, #2ea043, #56d364); }
+    .cat-bar-fill.warn { background: linear-gradient(90deg, #bb8009, #e3b341); }
+    .cat-bar-fill.danger { background: linear-gradient(90deg, #da3633, #ff7b72); }
+    .cat-bar-fill.none { background: linear-gradient(90deg, #57606a, #8b949e); }
 
     /* Monthly savings rate mini bars */
-    .savings-bar-list { display: flex; align-items: flex-end; gap: 6px; height: 130px; padding-top: 0; position: relative; }
-    .savings-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+    .savings-bar-list { display: flex; align-items: flex-end; gap: 10px; height: 170px; padding-top: 18px; position: relative; }
+    .savings-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; min-width: 0; }
     .savings-bar-inner { flex: 1; width: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end; }
-    .savings-bar-val { font-size: 8px; font-family: 'DM Mono', monospace; position: absolute; left: -4px; right: -4px; text-align: center; white-space: nowrap; pointer-events: none; }
-    .savings-bar-fill { width: 100%; border-radius: 3px 3px 0 0; min-height: 3px; transition: height 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-    .savings-bar-label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text3); margin-top: 4px; text-align: center; white-space: nowrap; flex-shrink: 0; }
+    .savings-bar-val { font-size: 12px; font-family: 'DM Mono', monospace; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; pointer-events: auto; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.55); z-index: 3; }
+    .savings-bar-fill { width: 100%; border-radius: 5px 5px 0 0; min-height: 3px; transition: height 0.5s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+    .savings-bar-fill.formula-tip { text-decoration: none; cursor: default; }
+    .savings-bar-label { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text3); margin-top: 8px; text-align: center; white-space: nowrap; flex-shrink: 0; }
+    .savings-rate-legend { margin-top: 14px; font-size: 13px; color: var(--text3); display:flex; gap:18px; flex-wrap:wrap; align-items:center; }
+    .savings-rate-note { margin-top: 14px; padding: 16px 18px; border: 1px solid rgba(139,148,158,0.28); border-radius: 12px; background: rgba(139,148,158,0.06); color: var(--text2); font-size: 13px; line-height: 1.75; }
+    .savings-rate-note b { color: var(--text); font-weight: 600; }
+    .savings-rate-note .good { color: var(--green); }
+    .savings-rate-note .ok { color: var(--accent); }
+    .savings-rate-note .bad { color: var(--red); }
+    .savings-rate-note-line { display: block; margin-top: 4px; }
 
     /* ============================================================
        DONUT CHART
@@ -700,6 +763,70 @@
     .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .legend-name { flex: 1; color: var(--text2); }
     .legend-pct { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); }
+
+    /* Formula hover tooltip for calculated percentages */
+    .formula-tip {
+      position: relative;
+      cursor: help;
+    }
+    span.formula-tip,
+    .sc-badge.formula-tip,
+    .kpi-badge.formula-tip,
+    .kpi-value.formula-tip,
+    .finance-value.formula-tip,
+    .finance-sub.formula-tip,
+    .legend-pct.formula-tip,
+    .cat-budget-value.formula-tip,
+    .cat-bar-pct.formula-tip,
+    .savings-bar-val.formula-tip {
+      text-decoration: underline dotted rgba(139,148,158,0.55);
+      text-underline-offset: 3px;
+    }
+    #formulaTooltip {
+      position: fixed;
+      z-index: 99999;
+      display: none;
+      max-width: min(360px, calc(100vw - 18px));
+      min-width: 220px;
+      white-space: pre-line;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.48);
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 500;
+      pointer-events: none;
+    }
+
+    /* Keep monthly savings % labels centered above each bar.
+       .formula-tip sets position:relative globally, so this chart needs an explicit override. */
+    .savings-bar-fill .savings-bar-val.formula-tip,
+    .savings-bar-fill .savings-bar-val {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      display: inline-block;
+      width: max-content;
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      line-height: 1.1;
+      text-align: center;
+    }
+    #formulaTooltip.show { display: block; }
+    @media (max-width:720px) {
+      #formulaTooltip {
+        min-width: min(260px, calc(100vw - 18px));
+        font-size: 11px;
+      }
+    }
 
     /* ============================================================
        BUDGET PROGRESS BARS
@@ -929,9 +1056,9 @@
     .finance-value { font-family:'DM Mono',monospace; font-size:18px; font-weight:500; }
     .finance-sub { font-size:11px; color:var(--text3); margin-top:4px; }
     .top-spend-list { display:flex; flex-direction:column; gap:8px; }
-    .top-spend-item { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:12px; padding:9px 10px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); }
+    .top-spend-item { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:13px; padding:11px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); }
     .top-spend-name { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text2); }
-    .top-spend-amt { font-family:'DM Mono',monospace; color:var(--red); white-space:nowrap; }
+    .top-spend-amt { font-family:'DM Mono',monospace; color:var(--red); white-space:nowrap; font-size:13px; }
 
     .tx-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
     .tag-chip { font-size:9px; padding:1px 5px; border-radius:99px; background:rgba(88,166,255,0.12); color:var(--accent); border:1px solid rgba(88,166,255,0.25); }
@@ -939,20 +1066,33 @@
     .trend-chart-wrap { width:100%; position:relative; }
     .trend-svg { width:100%; display:block; }
     .trend-x-labels { display:flex; justify-content:space-between; margin-top:6px; padding: 0 1.67%; }
-    .trend-x-label { font-size:10px; color:var(--text3); font-family:'DM Mono',monospace; }
+    .trend-x-label { font-size:12px; color:var(--text3); font-family:'DM Mono',monospace; }
     .trend-x-label.current { color:var(--purple); font-weight:600; }
-    .trend-footer { display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:11px; color:var(--text3); flex-wrap:wrap; gap:6px; }
-    .trend-stat { display:flex; align-items:center; gap:5px; }
-    .trend-stat b { font-family:'DM Mono',monospace; color:var(--text); }
+    .trend-footer { display:flex; justify-content:space-between; align-items:center; margin-top:12px; font-size:13px; color:var(--text3); flex-wrap:wrap; gap:10px; }
+    .trend-stat { display:flex; align-items:center; gap:6px; min-width:0; }
+    .trend-stat b { font-family:'DM Mono',monospace; color:var(--text); font-size:14px; word-break:break-word; }
     /* Trend hover tooltip */
     .trend-tooltip-overlay { position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
     .trend-hover-line { display:none; position:absolute; top:0; bottom:28px; width:1px; background:var(--border); pointer-events:none; }
     .trend-hover-label {
       display:none; position:absolute; background:var(--bg3); border:1px solid var(--border);
-      color:var(--text); font-size:11px; padding:5px 9px; border-radius:7px; white-space:nowrap;
+      color:var(--text); font-size:12px; padding:6px 10px; border-radius:7px; white-space:nowrap;
       pointer-events:none; transform:translateX(-50%); bottom:32px;
       box-shadow:0 4px 16px rgba(0,0,0,0.3); line-height:1.7;
     }
+    .trend-current-value {
+      position:absolute; z-index:2;
+      transform:translate(-50%, calc(-100% - 10px));
+      display:inline-flex; align-items:center; gap:4px;
+      max-width:70%; padding:5px 9px; border-radius:8px;
+      background:var(--purple); color:#fff;
+      font-family:'DM Mono',monospace; font-size:12px; font-weight:600;
+      line-height:1.2; white-space:nowrap; box-shadow:0 4px 14px rgba(0,0,0,0.28);
+      pointer-events:none;
+    }
+    .trend-current-value.align-end { transform:translateY(calc(-100% - 10px)); right:0; }
+    .trend-current-value.align-start { transform:translateY(calc(-100% - 10px)); left:0; }
+    .trend-minmax-row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
 
     #toast { display:flex; align-items:center; gap:12px; max-width:min(440px, calc(100vw - 40px)); }
     .toast-action {
@@ -1140,8 +1280,36 @@
       .bar-net { font-size: 8px; height: 18px; }
       .bar-label { font-size: 9px; height: 18px; }
       .bar-group { gap: 2px; }
-      .kpi-value { font-size: 17px; }
-      .kpi-label { font-size: 10px; }
+      .analytics-kpi-row { grid-template-columns: 1fr; }
+      .analytics-dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
+      .analytics-left-column { gap: 16px; }
+      .analytics-cat-panel { min-height: 0; }
+      .analytics-kpi { padding: 18px 16px; }
+      .kpi-value { font-size: 24px; }
+      .kpi-label { font-size: 12px; }
+      .kpi-badge { font-size: 11px; }
+      .cat-budget-summary { grid-template-columns: 1fr; gap: 8px; padding: 12px; }
+      .cat-budget-value { font-size: 13px; }
+      .cat-bar-header { grid-template-columns: 1fr; font-size: 12px; gap: 7px; }
+      .cat-bar-val { min-width: 0; width: 100%; align-items: flex-start; text-align: left; }
+      .cat-bar-spent { font-size: 12px; }
+      .cat-bar-budget { font-size: 10px; }
+      .cat-bar-pct { font-size: 10px; min-width: 46px; padding: 3px 7px; }
+      .cat-bar-track { height: 11px; }
+      .savings-bar-list { height: 150px; gap: 7px; overflow-x: auto; padding-top: 16px; padding-bottom: 2px; }
+      .savings-bar-col { min-width: 48px; }
+      .savings-bar-val { font-size: 10px; top: -18px; }
+      .savings-rate-legend { font-size: 11px; gap: 8px; }
+      .savings-rate-note { font-size: 11px; padding: 12px 12px; }
+      .savings-rate-note-line { margin-top: 6px; }
+      .savings-bar-label { font-size: 10px; }
+      .trend-x-label { font-size: 11px; }
+      .trend-footer { font-size: 12px; align-items: flex-start; }
+      .trend-stat { width: 100%; justify-content: space-between; }
+      .trend-stat b { font-size: 13px; text-align: right; }
+      .trend-minmax-row { width: 100%; gap: 8px; }
+      .trend-minmax-row .trend-stat { width: 100%; }
+      .trend-current-value { max-width:82%; font-size:11px; padding:4px 8px; }
 
       .donut { width: 120px; height: 120px; }
       .donut::after { inset: 24px; }
@@ -1899,44 +2067,45 @@
         <div class="analytics-kpi kpi-save">
           <div class="kpi-label">Tiết kiệm trung bình</div>
           <div class="kpi-value blue" id="kpiSavingsRate">—</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:6px;">Thu - Chi / Thu nhập</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:8px;">Thu - Chi / Thu nhập</div>
         </div>
       </div>
 
-      <!-- Row 1: Bar chart + Category breakdown -->
-      <div class="analytics-charts-grid">
-        <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div class="card-title" style="margin-bottom:0;">Thu &amp; Chi theo tháng</div>
+      <!-- Analytics charts: left column + category breakdown on the right -->
+      <div class="analytics-dashboard-grid">
+        <div class="analytics-left-column">
+          <div class="card analytics-chart-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+              <div class="card-title" style="margin-bottom:0;">Thu &amp; Chi theo tháng</div>
+            </div>
+            <div class="bar-chart-container" id="barChart">
+              <div class="empty-chart">Chưa có dữ liệu</div>
+            </div>
+            <div class="bar-chart-legend" id="barChartLegend">
+              <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--green);"></div>Thu nhập</div>
+              <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--red);"></div>Chi tiêu</div>
+              <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--purple);border-radius:50%;"></div>Tháng hiện tại</div>
+            </div>
           </div>
-          <div class="bar-chart-container" id="barChart">
-            <div class="empty-chart">Chưa có dữ liệu</div>
+
+          <div class="card analytics-chart-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div class="card-title" style="margin-bottom:0;">Trend số dư tích luỹ</div>
+            </div>
+            <div id="balanceTrendChart">
+              <div class="empty-state"><p>Chưa có dữ liệu.</p></div>
+            </div>
           </div>
-          <div class="bar-chart-legend" id="barChartLegend">
-            <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--green);"></div>Thu nhập</div>
-            <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--red);"></div>Chi tiêu</div>
-            <div class="bar-chart-legend-item"><div class="bar-chart-legend-dot" style="background:var(--purple);border-radius:50%;"></div>Tháng hiện tại</div>
+
+          <div class="card analytics-chart-card">
+            <div class="card-title">Tỷ lệ tiết kiệm theo tháng</div>
+            <div id="savingsRateChart"><div class="empty-state" style="padding:20px 0;"><p>Chưa có dữ liệu.</p></div></div>
           </div>
         </div>
-        <div class="card">
+
+        <div class="card analytics-cat-panel">
           <div class="card-title">Chi tiêu theo danh mục</div>
           <div id="catBreakdownChart"><div class="empty-state" style="padding:20px 0;"><p>Chưa có dữ liệu.</p></div></div>
-        </div>
-      </div>
-
-      <!-- Row 2: Trend chart + Savings rate -->
-      <div class="analytics-charts-grid">
-        <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div class="card-title" style="margin-bottom:0;">Trend số dư tích luỹ</div>
-          </div>
-          <div id="balanceTrendChart">
-            <div class="empty-state"><p>Chưa có dữ liệu.</p></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Tỷ lệ tiết kiệm theo tháng</div>
-          <div id="savingsRateChart"><div class="empty-state" style="padding:20px 0;"><p>Chưa có dữ liệu.</p></div></div>
         </div>
       </div>
     </div>
@@ -3126,7 +3295,8 @@
 
   function onMonthFilterChange() {
     currentFilter = document.getElementById('monthFilter').value;
-    renderAll();
+    renderOverviewView();
+    renderBudgetBars();
   }
 
   function getFilterDateRange() {
@@ -3150,16 +3320,19 @@
     return { from: `${currentFilter}-01`, to: `${currentFilter}-${String(lastDay).padStart(2,'0')}`, months: [currentFilter] };
   }
 
-  function getFiltered() {
-    let result;
+  function getOverviewFiltered() {
     if (currentFilter === 'all') {
-      result = [...transactions];
-    } else if (currentFilter === 'last3' || currentFilter === 'last6') {
-      const range = getFilterDateRange();
-      result = transactions.filter(t => t.date >= range.from && t.date <= range.to);
-    } else {
-      result = transactions.filter(t => t.date.startsWith(currentFilter));
+      return [...transactions];
     }
+    if (currentFilter === 'last3' || currentFilter === 'last6') {
+      const range = getFilterDateRange();
+      return transactions.filter(t => t.date >= range.from && t.date <= range.to);
+    }
+    return transactions.filter(t => t.date && t.date.startsWith(currentFilter));
+  }
+
+  function getTransactionFiltered() {
+    let result = [...transactions];
 
     if (advancedFilters.from) result = result.filter(t => t.date >= advancedFilters.from);
     if (advancedFilters.to) result = result.filter(t => t.date <= advancedFilters.to);
@@ -3176,6 +3349,11 @@
     return result;
   }
 
+  // Backward-compatible alias for older call sites; transaction tab is now the default scoped view.
+  function getFiltered() {
+    return getTransactionFiltered();
+  }
+
   function onAdvancedFilterChange() {
     advancedFilters = {
       from: document.getElementById('filterFrom')?.value || '',
@@ -3184,7 +3362,7 @@
       category: document.getElementById('filterCategory')?.value || 'all',
       search: (document.getElementById('filterSearch')?.value || '').trim()
     };
-    renderAll();
+    renderTransactionList();
   }
 
   function clearAdvancedFilters() {
@@ -3192,7 +3370,7 @@
     ['filterFrom','filterTo','filterSearch'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     const typeEl = document.getElementById('filterType'); if (typeEl) typeEl.value = 'all';
     const catEl = document.getElementById('filterCategory'); if (catEl) catEl.value = 'all';
-    renderAll();
+    renderTransactionList();
   }
 
   function isFixedExpenseTransaction(t) {
@@ -3500,21 +3678,26 @@
   /* ============================================================
      RENDER ALL
   ============================================================ */
-  function renderAll() {
-    renderBackupReminder();
-    updateTabBadge();
-    const filtered = getFiltered();
-    renderSummaryCards(filtered);
+  function renderOverviewView() {
+    const overviewFiltered = getOverviewFiltered();
+    renderSummaryCards(overviewFiltered);
     renderBarChart();
-    renderDonutChart(filtered);
-    renderBudgetBars(filtered);
-    renderManagerPanel();
-    renderTagOptions();
-    renderFinanceDashboard(filtered);
+    renderDonutChart(overviewFiltered);
+    renderFinanceDashboard(overviewFiltered);
     renderBalanceTrendChart();
     renderCatBreakdownChart();
     renderSavingsRateChart();
-    renderTransactions(filtered);
+    renderRecentTransactions(overviewFiltered);
+  }
+
+  function renderAll() {
+    renderBackupReminder();
+    updateTabBadge();
+    renderOverviewView();
+    renderBudgetBars();
+    renderManagerPanel();
+    renderTagOptions();
+    renderTransactionList();
     renderRecurringList();
   }
 
@@ -3559,11 +3742,17 @@
       const el = document.getElementById(id);
       if (!el) return;
       if (prevVal === 0 || cur === 0) { el.style.display = 'none'; return; }
-      const diff = Math.round((cur - prevVal) / prevVal * 100);
+      const rawDiff = (cur - prevVal) / prevVal * 100;
+      const diff = Math.round(rawDiff);
       const isUp = diff > 0;
       const isGood = higherIsBetter ? isUp : !isUp;
       el.textContent = (isUp ? '↑ ' : '↓ ') + Math.abs(diff) + '% vs tháng trước';
-      el.className = 'sc-badge ' + (isGood ? 'up' : 'down');
+      el.className = 'sc-badge formula-tip ' + (isGood ? 'up' : 'down');
+      el.setAttribute('data-tooltip', pctTooltip(
+        'So sánh với tháng trước',
+        `(Giá trị hiện tại - Giá trị tháng trước) / Giá trị tháng trước × 100%`,
+        `Hiện tại = ${fmtVND(cur)}; tháng trước = ${fmtVND(prevVal)}`
+      ));
       el.style.display = 'inline-flex';
     }
     setBadge('scIncomeBadge',  totalIn, prev.income,  true);
@@ -3572,7 +3761,12 @@
       const savBadge = document.getElementById('scSavingsBadge');
       if (savBadge) {
         savBadge.textContent = `💰 Tiết kiệm ${savingsRate}%`;
-        savBadge.className = 'sc-badge ' + (savingsRate >= 20 ? 'up' : savingsRate >= 0 ? 'neutral' : 'down');
+        savBadge.className = 'sc-badge formula-tip ' + (savingsRate >= 20 ? 'up' : savingsRate >= 0 ? 'neutral' : 'down');
+        savBadge.setAttribute('data-tooltip', pctTooltip(
+          'Tỷ lệ tiết kiệm',
+          `(Thu nhập - Chi tiêu) / Thu nhập × 100%`,
+          `Thu nhập = ${fmtVND(totalIn)}; chi tiêu = ${fmtVND(totalEx)}; số dư = ${fmtVND(balance)}`
+        ));
         savBadge.style.display = 'inline-flex';
       }
     }
@@ -3650,21 +3844,43 @@
     kpiExp.textContent = fmtVND(totalExp);
     kpiInc.textContent = fmtVND(totalInc);
     kpiSav.textContent = totalInc > 0 ? savingsRate + '%' : '—';
+    kpiSav.classList.toggle('formula-tip', totalInc > 0);
+    if (totalInc > 0) {
+      kpiSav.setAttribute('data-tooltip', pctTooltip(
+        'Tỷ lệ tiết kiệm 6 tháng',
+        `(Thu nhập 6 tháng - Chi tiêu 6 tháng) / Thu nhập 6 tháng × 100%`,
+        `Thu nhập 6 tháng = ${fmtVND(totalInc)}; chi tiêu 6 tháng = ${fmtVND(totalExp)}; số dư = ${fmtVND(totalInc - totalExp)}`
+      ));
+    } else {
+      kpiSav.removeAttribute('data-tooltip');
+    }
 
     // Compare last 2 months for badge
     if (monthData.length >= 2) {
       const prev = monthData[monthData.length - 2];
       const cur  = monthData[monthData.length - 1];
       if (prev.exp > 0) {
-        const diff = Math.round((cur.exp - prev.exp) / prev.exp * 100);
+        const rawDiff = (cur.exp - prev.exp) / prev.exp * 100;
+        const diff = Math.round(rawDiff);
         kpiExpBadge.textContent = (diff >= 0 ? '↑ ' : '↓ ') + Math.abs(diff) + '% vs tháng trước';
-        kpiExpBadge.className = 'kpi-badge ' + (diff >= 0 ? 'down' : 'up');
-      } else { kpiExpBadge.textContent = ''; }
+        kpiExpBadge.className = 'kpi-badge formula-tip ' + (diff >= 0 ? 'down' : 'up');
+        kpiExpBadge.setAttribute('data-tooltip', pctTooltip(
+          'Chi tiêu so với tháng trước',
+          `(Chi tiêu tháng hiện tại - Chi tiêu tháng trước) / Chi tiêu tháng trước × 100%`,
+          `Chi tiêu hiện tại = ${fmtVND(cur.exp)}; chi tiêu tháng trước = ${fmtVND(prev.exp)}`
+        ));
+      } else { kpiExpBadge.textContent = ''; kpiExpBadge.className = 'kpi-badge'; kpiExpBadge.removeAttribute('data-tooltip'); kpiExpBadge.removeAttribute('title'); }
       if (prev.inc > 0) {
-        const diff = Math.round((cur.inc - prev.inc) / prev.inc * 100);
+        const rawDiff = (cur.inc - prev.inc) / prev.inc * 100;
+        const diff = Math.round(rawDiff);
         kpiIncBadge.textContent = (diff >= 0 ? '↑ ' : '↓ ') + Math.abs(diff) + '% vs tháng trước';
-        kpiIncBadge.className = 'kpi-badge ' + (diff >= 0 ? 'up' : 'down');
-      } else { kpiIncBadge.textContent = ''; }
+        kpiIncBadge.className = 'kpi-badge formula-tip ' + (diff >= 0 ? 'up' : 'down');
+        kpiIncBadge.setAttribute('data-tooltip', pctTooltip(
+          'Thu nhập so với tháng trước',
+          `(Thu nhập tháng hiện tại - Thu nhập tháng trước) / Thu nhập tháng trước × 100%`,
+          `Thu nhập hiện tại = ${fmtVND(cur.inc)}; thu nhập tháng trước = ${fmtVND(prev.inc)}`
+        ));
+      } else { kpiIncBadge.textContent = ''; kpiIncBadge.className = 'kpi-badge'; kpiIncBadge.removeAttribute('data-tooltip'); kpiIncBadge.removeAttribute('title'); }
     }
   }
 
@@ -3696,7 +3912,7 @@
       <div class="legend-item">
         <div class="legend-dot" style="background:${s.color}"></div>
         <span class="legend-name">${getCategoryMeta(s.cat).emoji||''} ${displayCategoryName(s.cat)}</span>
-        <span class="legend-pct">${(s.pct*100).toFixed(0)}%</span>
+        <span class="legend-pct formula-tip" ${pctTitleAttr('Tỷ trọng danh mục', `Chi tiêu danh mục / Tổng chi tiêu × 100%`, `Chi tiêu danh mục = ${fmtVND(s.amt)}; tổng chi tiêu = ${fmtVND(total)}`)}>${(s.pct*100).toFixed(0)}%</span>
       </div>`).join('');
   }
 
@@ -3733,7 +3949,7 @@
               ${r.name || r.category}
             </div>
           </div>
-          <span class="budget-pct-badge ${r.fillClass}">${Math.round(r.pct)}%</span>
+          <span class="budget-pct-badge formula-tip ${r.fillClass}" ${pctTitleAttr('Tỷ lệ dùng ngân sách tháng', `Đã dùng / Ngân sách tháng × 100%`, `Đã dùng = ${fmtVND(r.spent)}; ngân sách tháng = ${fmtVND(r.budget)}`)}>${Math.round(r.pct)}%</span>
           <span class="budget-actions">
             <button class="budget-edit" onclick="editBudgetItem('${escapeAttr(String(r.id))}')" title="Sửa">✎</button>
             <button class="budget-del" onclick="deleteBudgetItem('${escapeAttr(String(r.id))}')" title="Xóa">✕</button>
@@ -3749,7 +3965,7 @@
             <div class="budget-remaining ${remClass}">${r.over ? fmtVND(Math.abs(remaining)) : fmtVND(remaining)}</div>
           </div>
         </div>
-        <div class="progress-track">
+        <div class="progress-track" ${pctTitleAttr('Tỷ lệ dùng ngân sách tháng', `Đã dùng / Ngân sách tháng × 100%`, `Đã dùng = ${fmtVND(r.spent)}; ngân sách tháng = ${fmtVND(r.budget)}`)}>
           <div class="progress-fill ${r.fillClass}" style="width:${r.pct}%"></div>
         </div>
       </div>`;
@@ -3877,19 +4093,32 @@
   /* ============================================================
      TRANSACTIONS RENDER
   ============================================================ */
-  function renderTransactions(filtered) {
+  function renderRecentTransactions(filtered = getOverviewFiltered()) {
     const sorted = [...filtered].sort((a,b) => new Date(b.date)-new Date(a.date));
-    document.getElementById('txCount').textContent     = `${sorted.length} mục`;
-    document.getElementById('txCountFull').textContent = `${sorted.length} giao dịch`;
+    const countEl = document.getElementById('txCount');
+    if (countEl) countEl.textContent = `${sorted.length} mục`;
 
     const shortEl = document.getElementById('txListShort');
-    const fullEl  = document.getElementById('txListFull');
-    const recent  = sorted.slice(0, 5);
-
+    if (!shortEl) return;
+    const recent = sorted.slice(0, 5);
     shortEl.innerHTML = recent.length === 0 ? emptyState()
       : recent.map(t => txRow(t, false)).join('');
-    fullEl.innerHTML  = sorted.length === 0 ? emptyState()
+  }
+
+  function renderTransactionList(filtered = getTransactionFiltered()) {
+    const sorted = [...filtered].sort((a,b) => new Date(b.date)-new Date(a.date));
+    const countEl = document.getElementById('txCountFull');
+    if (countEl) countEl.textContent = `${sorted.length} giao dịch`;
+
+    const fullEl = document.getElementById('txListFull');
+    if (!fullEl) return;
+    fullEl.innerHTML = sorted.length === 0 ? emptyState()
       : '<div class="tx-list">' + sorted.map(t => txRow(t, true)).join('') + '</div>';
+  }
+
+  function renderTransactions(filtered = getTransactionFiltered()) {
+    renderRecentTransactions(getOverviewFiltered());
+    renderTransactionList(filtered);
   }
 
   function txRow(t, showDel) {
@@ -3922,7 +4151,6 @@
   ============================================================ */
   function activeMonthKeyForInsights() {
     if (currentFilter !== 'all' && currentFilter !== 'last3' && currentFilter !== 'last6') return currentFilter;
-    if (advancedFilters.from && advancedFilters.from.slice(0,7) === advancedFilters.to?.slice(0,7)) return advancedFilters.from.slice(0,7);
     return currentMonthKey();
   }
 
@@ -3963,11 +4191,11 @@
         <div class="finance-metric">
           <div class="finance-label">So sánh tháng</div>
           <div class="finance-value ${diff <= 0 ? 'pos' : 'neg'}">${diff <= 0 ? '↓' : '↑'} ${fmtVND(Math.abs(diff))}</div>
-          <div class="finance-sub">${compareText}</div>
+          <div class="finance-sub${prev.expense ? ' formula-tip' : ''}" ${prev.expense ? pctTitleAttr('So sánh chi tiêu tháng', `(Chi tiêu tháng hiện tại - Chi tiêu tháng trước) / Chi tiêu tháng trước × 100%`, `Chi tiêu hiện tại = ${fmtVND(cur.expense)}; chi tiêu tháng trước = ${fmtVND(prev.expense)}`) : ''}>${compareText}</div>
         </div>
         <div class="finance-metric">
           <div class="finance-label">Tỷ lệ tiết kiệm</div>
-          <div class="finance-value ${savingsRate >= 20 ? 'pos' : savingsRate >= 0 ? 'blue' : 'neg'}">${cur.income ? savingsRate.toFixed(0) + '%' : '—'}</div>
+          <div class="finance-value ${cur.income ? 'formula-tip ' : ''}${savingsRate >= 20 ? 'pos' : savingsRate >= 0 ? 'blue' : 'neg'}" ${cur.income ? pctTitleAttr('Tỷ lệ tiết kiệm', `Số dư / Thu nhập × 100%`, `Số dư = ${fmtVND(cur.balance)}; thu nhập = ${fmtVND(cur.income)}`) : ''}>${cur.income ? savingsRate.toFixed(0) + '%' : '—'}</div>
           <div class="finance-sub">Số dư / thu nhập của ${formatMonthLabel(monthKey)}</div>
         </div>
         <div class="finance-metric">
@@ -4035,11 +4263,20 @@
     const curMonth = currentMonthKey();
     const dotCircles = pts.map((p) => {
       const isCur = p.key === curMonth;
-      const labelHtml = isCur
-        ? `<rect x="${p.x - 32}" y="${p.y - 28}" width="64" height="18" rx="4" fill="var(--purple)" opacity="0.9"/><text x="${p.x}" y="${p.y - 15}" text-anchor="middle" font-size="9" fill="white" font-family="monospace">${fmtShort(p.balance)}</text>`
-        : '';
-      return `${labelHtml}<circle cx="${p.x}" cy="${p.y}" r="${isCur ? 5 : 3.5}" fill="${isCur ? 'var(--purple)' : 'var(--accent)'}" stroke="var(--bg2)" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
+      return `<circle cx="${p.x}" cy="${p.y}" r="${isCur ? 5 : 3.5}" fill="${isCur ? 'var(--purple)' : 'var(--accent)'}" stroke="var(--bg2)" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
     }).join('');
+
+    const curIdx = Math.max(0, pts.findIndex(p => p.key === curMonth));
+    const curPt = pts[curIdx] || pts[pts.length - 1];
+    const curTop = Math.max(18, (curPt.y / H) * 100);
+    const curLeft = (curPt.x / W) * 100;
+    const curAlignClass = curIdx === pts.length - 1 ? ' align-end' : curIdx === 0 ? ' align-start' : '';
+    const curStyle = curIdx === pts.length - 1
+      ? `top:${curTop}%;`
+      : curIdx === 0
+        ? `top:${curTop}%;`
+        : `top:${curTop}%;left:${curLeft}%;`;
+    const currentValueBadge = `<div class="trend-current-value${curAlignClass}" style="${curStyle}">${fmtShort(curPt.balance)}</div>`;
 
     // Invisible hit-area rects for hover (full height, slim width per data point)
     const hitAreas = pts.map((p) => {
@@ -4069,15 +4306,16 @@
             ${dotCircles}
             ${hitAreas}
           </svg>
+          ${currentValueBadge}
           <div class="trend-hover-line" id="trendHoverLine"></div>
           <div class="trend-hover-label" id="trendHoverLabel"></div>
         </div>
         <div class="trend-x-labels">${xLabels}</div>
         <div class="trend-footer">
-          <div class="trend-stat">Tháng hiện tại: <b>${fmtVND(months[5].balance)}</b></div>
-          <div style="display:flex;gap:14px;">
-            <div class="trend-stat" style="color:var(--green);">↑ Cao: <b>${fmtVND(maxVal)}</b></div>
-            <div class="trend-stat" style="color:var(--red);">↓ Thấp: <b>${fmtVND(minVal)}</b></div>
+          <div class="trend-stat">Tháng hiện tại: <b>${fmtVND(curPt.balance)}</b></div>
+          <div class="trend-minmax-row">
+            <div class="trend-stat" style="color:var(--green);">↑ Max: <b>${fmtVND(maxVal)}</b></div>
+            <div class="trend-stat" style="color:var(--red);">↓ Min: <b>${fmtVND(minVal)}</b></div>
           </div>
         </div>
       </div>`;
@@ -4126,34 +4364,82 @@
   function renderCatBreakdownChart() {
     const el = document.getElementById('catBreakdownChart');
     if (!el) return;
+
+    // Analytics tab is fixed to the latest 6 calendar months.
+    // The category bar % is now budget usage (spent / 6-month budget),
+    // so the number and the visual bar width use the same denominator.
     const months = [];
     for (let i = 5; i >= 0; i--) {
       const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - i);
       months.push(d.toISOString().slice(0,7));
     }
+    const monthCount = months.length;
     const expenses = transactions.filter(t => t.type === 'expense' && months.some(m => t.date.startsWith(m)));
-    const total = expenses.reduce((s,t) => s + t.amount, 0);
-    if (total === 0) {
-      el.innerHTML = '<div class="empty-state" style="padding:20px 0;"><p>Chưa có dữ liệu.</p></div>';
+    const totalSpent = expenses.reduce((s,t) => s + t.amount, 0);
+
+    const monthlyBudgetByCat = {};
+    budgetItems.forEach(item => {
+      const category = item.category || item.name;
+      if (!category) return;
+      monthlyBudgetByCat[category] = parseInt(item.budget, 10) || 0;
+    });
+
+    const totalBudget6m = Object.values(monthlyBudgetByCat).reduce((s,b) => s + b, 0) * monthCount;
+    const budgetUsage = totalBudget6m > 0 ? Math.round((totalSpent / totalBudget6m) * 100) : 0;
+    const summaryHtml = `<div class="cat-budget-summary">
+      <div class="cat-budget-kpi">
+        <div class="cat-budget-label">Đã chi 6 tháng</div>
+        <div class="cat-budget-value">${fmtVND(totalSpent)}</div>
+      </div>
+      <div class="cat-budget-kpi">
+        <div class="cat-budget-label">Ngân sách 6 tháng</div>
+        <div class="cat-budget-value">${fmtVND(totalBudget6m)}</div>
+      </div>
+      <div class="cat-budget-kpi">
+        <div class="cat-budget-label">Đã dùng ngân sách</div>
+        <div class="cat-budget-value${totalBudget6m > 0 ? ' formula-tip' : ''}" ${totalBudget6m > 0 ? pctTitleAttr('Đã dùng ngân sách 6 tháng', `Đã chi 6 tháng / Ngân sách 6 tháng × 100%`, `Đã chi 6 tháng = ${fmtVND(totalSpent)}; ngân sách 6 tháng = ${fmtVND(totalBudget6m)}`) : ''}>${totalBudget6m > 0 ? budgetUsage + '%' : '—'}</div>
+      </div>
+    </div>`;
+
+    if (totalSpent === 0) {
+      el.innerHTML = summaryHtml + '<div class="empty-state" style="padding:20px 0;"><p>Chưa có dữ liệu chi tiêu trong 6 tháng gần nhất.</p></div>';
       return;
     }
+
     const catTotals = {};
     expenses.forEach(t => { catTotals[t.category] = (catTotals[t.category]||0) + t.amount; });
-    const sorted = Object.entries(catTotals).sort((a,b) => b[1]-a[1]).slice(0, 8);
-    const maxAmt = sorted[0][1];
 
-    el.innerHTML = `<div class="cat-bar-list">
-      ${sorted.map(([cat, amt]) => {
+    // Include categories that have a 6-month budget even when spending is 0,
+    // then sort by highest spending so the view still focuses on actual usage.
+    Object.keys(monthlyBudgetByCat).forEach(cat => {
+      if (monthlyBudgetByCat[cat] > 0 && catTotals[cat] == null) catTotals[cat] = 0;
+    });
+
+    const sorted = Object.entries(catTotals)
+      .sort((a,b) => b[1] - a[1])
+      .slice(0, 8);
+
+    el.innerHTML = summaryHtml + `<div class="cat-bar-list">
+      ${sorted.map(([cat, spent]) => {
         const meta = getCategoryMeta(cat);
-        const pct = (amt / total * 100).toFixed(0);
-        const barW = (amt / maxAmt * 100).toFixed(1);
+        const monthlyBudget = monthlyBudgetByCat[cat] ?? (parseInt(meta.budget, 10) || 0);
+        const budget6m = monthlyBudget * monthCount;
+        const pct = budget6m > 0 ? Math.round((spent / budget6m) * 100) : null;
+        const barW = pct == null ? Math.min((spent / totalSpent) * 100, 100) : Math.min(pct, 100);
+        const statusClass = pct == null ? 'none' : pct < 60 ? 'ok' : pct < 90 ? 'warn' : 'danger';
+        const pctText = pct == null ? 'N/A' : pct + '%';
+        const budgetText = budget6m > 0 ? `Ngân sách 6T: ${fmtShort(budget6m)}` : 'Chưa đặt ngân sách';
         return `<div class="cat-bar-item">
           <div class="cat-bar-header">
             <span class="cat-bar-name"><span>${meta.emoji||'📦'}</span>${displayCategoryName(cat)}</span>
-            <span class="cat-bar-val">${pct}% · ${fmtShort(amt)}</span>
+            <span class="cat-bar-val">
+              <span class="cat-bar-spent">${fmtVND(spent)}</span>
+              <span class="cat-bar-budget">${budgetText}</span>
+              <span class="cat-bar-pct formula-tip ${statusClass}" ${pct == null ? pctTitleAttr('Tỷ trọng trong tổng chi tiêu 6 tháng', `Chi tiêu danh mục / Tổng chi tiêu 6 tháng × 100%`, `Chi tiêu danh mục = ${fmtVND(spent)}; tổng chi tiêu 6 tháng = ${fmtVND(totalSpent)}`) : pctTitleAttr('Tỷ lệ dùng ngân sách danh mục 6 tháng', `Chi tiêu danh mục / Ngân sách danh mục 6 tháng × 100%`, `Chi tiêu danh mục = ${fmtVND(spent)}; ngân sách danh mục 6 tháng = ${fmtVND(budget6m)}`)}>${pctText}</span>
+            </span>
           </div>
-          <div class="cat-bar-track">
-            <div class="cat-bar-fill" style="width:${barW}%;background:${meta.color||'var(--accent)'}"></div>
+          <div class="cat-bar-track formula-tip" ${pct == null ? pctTitleAttr('Tỷ trọng trong tổng chi tiêu 6 tháng', `Chi tiêu danh mục / Tổng chi tiêu 6 tháng × 100%`, `Chi tiêu danh mục = ${fmtVND(spent)}; tổng chi tiêu 6 tháng = ${fmtVND(totalSpent)}`) : pctTitleAttr('Tỷ lệ dùng ngân sách danh mục 6 tháng', `Chi tiêu danh mục / Ngân sách danh mục 6 tháng × 100%`, `Chi tiêu danh mục = ${fmtVND(spent)}; ngân sách danh mục 6 tháng = ${fmtVND(budget6m)}`)}>
+            <div class="cat-bar-fill ${statusClass}" style="width:${barW.toFixed(1)}%"></div>
           </div>
         </div>`;
       }).join('')}
@@ -4173,7 +4459,7 @@
       const label = d.toLocaleString('vi-VN',{month:'short'});
       const totals = monthTotals(key);
       const rate = totals.income > 0 ? Math.round((totals.balance / totals.income) * 100) : 0;
-      months.push({ key, label, rate, income: totals.income });
+      months.push({ key, label, rate, income: totals.income, expense: totals.expense, balance: totals.balance });
     }
     const hasData = months.some(m => m.income > 0);
     if (!hasData) {
@@ -4188,21 +4474,28 @@
         ${months.map(m => {
           const isCur = m.key === curMonth;
           const isPos = m.rate >= 0;
-          const barH = m.income > 0 ? Math.max((Math.abs(m.rate) / maxAbs) * 82, 3) : 0;
+          const barH = m.income > 0 ? Math.max((Math.abs(m.rate) / maxAbs) * 70, 3) : 0;
           const color = m.rate >= 20 ? 'var(--green)' : m.rate >= 0 ? 'var(--accent)' : 'var(--red)';
           return `<div class="savings-bar-col">
             <div class="savings-bar-inner">
-              <span class="savings-bar-val" style="color:${color};bottom:calc(${barH.toFixed(1)}% + 3px)">${m.income > 0 ? (m.rate > 0 ? '+' : '') + m.rate + '%' : '—'}</span>
-              <div class="savings-bar-fill" style="height:${barH.toFixed(1)}%;background:${color};${isCur?'outline:2px solid var(--purple);outline-offset:2px;border-radius:3px 3px 0 0;':''}"></div>
+              <div class="savings-bar-fill" style="height:${barH.toFixed(1)}%;background:${color};${isCur?'outline:2px solid var(--purple);outline-offset:2px;border-radius:5px 5px 0 0;':''}">
+                <span class="savings-bar-val${m.income > 0 ? ' formula-tip' : ''}" ${m.income > 0 ? pctTitleAttr('Tỷ lệ tiết kiệm tháng ' + m.label, `Số dư tháng / Thu nhập tháng × 100%`, `Số dư tháng = ${fmtVND(m.balance)}; thu nhập tháng = ${fmtVND(m.income)}`) : ''} style="color:${color};">${m.income > 0 ? (m.rate > 0 ? '+' : '') + m.rate + '%' : '—'}</span>
+              </div>
             </div>
             <span class="savings-bar-label" style="${isCur?'color:var(--purple);font-weight:600;':''}">${m.label}</span>
           </div>`;
         }).join('')}
       </div>
-      <div style="margin-top:10px;font-size:11px;color:var(--text3);display:flex;gap:12px;flex-wrap:wrap;">
+      <div class="savings-rate-legend">
         <span style="color:var(--green)">● ≥20% tốt</span>
         <span style="color:var(--accent)">● 0–19% ổn</span>
         <span style="color:var(--red)">● &lt;0% bội chi</span>
+      </div>
+      <div class="savings-rate-note">
+        <b>Ghi chú:</b>
+        <span class="savings-rate-note-line"><span class="good">≥20% tốt</span> vì sau khi chi tiêu vẫn giữ lại được ít nhất 1/5 thu nhập;</span>
+        <span class="savings-rate-note-line"><span class="ok">0–19% ổn</span> vì vẫn còn dư nhưng biên an toàn chưa cao;</span>
+        <span class="savings-rate-note-line"><span class="bad">&lt;0% bội chi</span> vì chi tiêu vượt thu nhập trong tháng.</span>
       </div>`;
   }
   /* ============================================================
@@ -4212,7 +4505,7 @@
      - already-applied recurring records
      - theme
   ============================================================ */
-  function exportJSON(txns = transactions, suffix = todayStr(), isRange = false) {
+  function exportJSON(txns = getTransactionFiltered(), suffix = todayStr(), isRange = false) {
     const backup = {
       appName: 'Spending Tracker',
       backupDate: new Date().toISOString(),
@@ -4293,7 +4586,7 @@
   /* ============================================================
      EXPORT CSV
   ============================================================ */
-  function exportCSV(txns = getFiltered(), suffix = todayStr()) {
+  function exportCSV(txns = getTransactionFiltered(), suffix = todayStr()) {
     const filtered = txns;
     if (filtered.length === 0) { showToast('⚠️ Không có dữ liệu để xuất'); return; }
     const header = ['Ngay','Loai','DanhMuc','SoTien','GhiChu','DinhKy','Tags'];
@@ -4459,7 +4752,7 @@
     overview: 'Tổng quan',
     transactions: 'Giao dịch',
     budget: 'Ngân sách',
-    analytics: 'Thống kê',
+    analytics: 'Thống kê 6 tháng gần nhất',
     settings: 'Cài đặt'
   };
 
@@ -4480,10 +4773,10 @@
     // Update topbar title
     const titleEl = document.getElementById('topbarTitle');
     if (titleEl) titleEl.textContent = TAB_TITLES[tabId] || '';
-    // Show month filter bar only on overview and transactions tabs
+    // Show month filter bar only on the overview tab; transaction filters live in the advanced filter panel.
     const filterBar = document.getElementById('headerFilterBar');
     if (filterBar) {
-      filterBar.style.display = (tabId === 'overview' || tabId === 'transactions') ? '' : 'none';
+      filterBar.style.display = (tabId === 'overview') ? '' : 'none';
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -4538,6 +4831,18 @@
   }
 
   function escapeAttr(value) { return escapeHtml(value); }
+
+  function pctTooltip(title, formula, actualData) {
+    // Keep formula tooltip simple: show formula with variable names only.
+    // Do not include the actual numeric data or a separate result line.
+    return `${title}
+Công thức: ${formula}`;
+  }
+
+  function pctTitleAttr(title, formula, actualData) {
+    const tip = pctTooltip(title, formula, actualData);
+    return `data-tooltip="${escapeAttr(tip)}"`;
+  }
 
   // Format as VND (no decimals, dot thousand separator, ₫ suffix)
   function fmtVND(n) {
@@ -4640,6 +4945,65 @@
   function currentMonthKey() {
     return new Date().toISOString().slice(0, 7);
   }
+
+
+  // Body-level formula tooltip. This avoids clipping inside cards, grids, and sticky headers.
+  let formulaTooltipEl = null;
+  function getFormulaTooltipEl() {
+    if (!formulaTooltipEl) {
+      formulaTooltipEl = document.createElement('div');
+      formulaTooltipEl.id = 'formulaTooltip';
+      document.body.appendChild(formulaTooltipEl);
+    }
+    return formulaTooltipEl;
+  }
+  function positionFormulaTooltip(target) {
+    const tip = getFormulaTooltipEl();
+    if (!tip.classList.contains('show')) return;
+    const rect = target.getBoundingClientRect();
+    const margin = 8;
+    const tipRect = tip.getBoundingClientRect();
+    let left = rect.left + rect.width / 2 - tipRect.width / 2;
+    left = Math.max(margin, Math.min(left, window.innerWidth - tipRect.width - margin));
+    let top = rect.top - tipRect.height - 10;
+    if (top < margin) top = rect.bottom + 10;
+    if (top + tipRect.height > window.innerHeight - margin) top = Math.max(margin, window.innerHeight - tipRect.height - margin);
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+  }
+  function showFormulaTooltip(target) {
+    const text = target?.getAttribute('data-tooltip');
+    if (!text) return;
+    const tip = getFormulaTooltipEl();
+    tip.textContent = text;
+    tip.classList.add('show');
+    positionFormulaTooltip(target);
+  }
+  function hideFormulaTooltip() {
+    if (formulaTooltipEl) formulaTooltipEl.classList.remove('show');
+  }
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest?.('.formula-tip[data-tooltip]');
+    if (target) showFormulaTooltip(target);
+  });
+  document.addEventListener('mousemove', (e) => {
+    const target = e.target.closest?.('.formula-tip[data-tooltip]');
+    if (target) positionFormulaTooltip(target);
+  });
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest?.('.formula-tip[data-tooltip]');
+    if (target && !target.contains(e.relatedTarget)) hideFormulaTooltip();
+  });
+  document.addEventListener('focusin', (e) => {
+    const target = e.target.closest?.('.formula-tip[data-tooltip]');
+    if (target) showFormulaTooltip(target);
+  });
+  document.addEventListener('focusout', (e) => {
+    const target = e.target.closest?.('.formula-tip[data-tooltip]');
+    if (target) hideFormulaTooltip();
+  });
+  window.addEventListener('scroll', hideFormulaTooltip, true);
+  window.addEventListener('resize', hideFormulaTooltip);
 </script>
 </body>
 </html>
