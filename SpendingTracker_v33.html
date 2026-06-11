@@ -2332,9 +2332,8 @@
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
       await firebase.auth().signInWithPopup(provider);
-      // Access check happens in loadAppAfterAuth via Firestore Rules —
-      // if email is not in allowedUsers collection, the data read will fail
-      // and onAccessDenied() will sign them out with a friendly message.
+      // Access check happens in onAuthStateChanged — keep button in loading
+      // state until that resolves (it will re-enable if access is denied).
     } catch (err) {
       console.error('Google login error:', err);
       errorEl.textContent = err.code === 'auth/popup-closed-by-user'
@@ -2386,6 +2385,21 @@
   function setupAuthStateObserver() {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
+        // ── Check allowedUsers BEFORE showing the app ──
+        // Keep the login overlay visible while we verify access.
+        try {
+          const allowedSnap = await db.collection('allowedUsers').doc(user.email).get();
+          if (!allowedSnap.exists) {
+            await onAccessDenied(user.email);
+            return;
+          }
+        } catch (err) {
+          // permission-denied means the Rules rejected the read → not allowed
+          await onAccessDenied(user.email);
+          return;
+        }
+
+        // ── Access confirmed — proceed ──
         _currentUser = {
           displayName: user.displayName || user.email,
           email: user.email,
@@ -2395,7 +2409,7 @@
 
         // Update user pill in topbar and sidebar
         const displayName = user.displayName || user.email;
-        const shortName = displayName.split(' ').pop(); // last word, e.g. first name
+        const shortName = displayName.split(' ').pop();
         const pillEl = document.getElementById('userPillName');
         if (pillEl) pillEl.textContent = shortName;
         const sidebarName = document.getElementById('sidebarUserName');
