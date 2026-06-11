@@ -2332,7 +2332,9 @@
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
       await firebase.auth().signInWithPopup(provider);
-      // onAuthStateChanged below will handle the rest
+      // Access check happens in loadAppAfterAuth via Firestore Rules —
+      // if email is not in allowedUsers collection, the data read will fail
+      // and onAccessDenied() will sign them out with a friendly message.
     } catch (err) {
       console.error('Google login error:', err);
       errorEl.textContent = err.code === 'auth/popup-closed-by-user'
@@ -2349,6 +2351,20 @@
     if (!confirm('Bạn có muốn đăng xuất không?')) return;
     await firebase.auth().signOut();
     // onAuthStateChanged will show the login overlay
+  }
+
+  // ── Called when Firestore rejects access (email not in allowedUsers) ──
+  async function onAccessDenied(email) {
+    await firebase.auth().signOut();
+    // After signOut, onAuthStateChanged re-shows the overlay.
+    // Show the error message once the overlay is visible.
+    setTimeout(() => {
+      const errorEl = document.getElementById('authError');
+      if (errorEl) {
+        errorEl.textContent = `Tài khoản ${email} không được phép truy cập. Liên hệ quản trị viên để được cấp quyền.`;
+        errorEl.classList.add('show');
+      }
+    }, 400);
   }
 
   // ── Account modal ──
@@ -2757,6 +2773,8 @@
     updateRecurringFrequencyUI();
 
     // ── Load data from Firestore ──
+    // If the user's email is not in the allowedUsers collection, Firestore
+    // Rules will reject this read with permission-denied → sign them out.
     try {
       const snap = await DOC_REF.get();
       if (snap.exists) {
@@ -2767,6 +2785,13 @@
       }
     } catch (err) {
       console.error('Firebase init error:', err);
+      if (err.code === 'permission-denied') {
+        const email = firebase.auth().currentUser?.email || '';
+        const loadingEl = document.getElementById('loadingOverlay');
+        if (loadingEl) loadingEl.style.display = 'none';
+        await onAccessDenied(email);
+        return;
+      }
       const errEl = document.getElementById('loadingError');
       if (errEl) {
         errEl.textContent = '⚠️ Không thể kết nối database. Kiểm tra kết nối mạng và thử lại.';
